@@ -40,20 +40,6 @@ class ModelMgr:
         return self.preprocessor.transform(combined_df)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    ### FUCK
-
     def diagnose_unknown_categories(self, df):
             # Get the transformer by name or by index. Here we assume 'one_hot' is the name you've given to your OneHotEncoder within the transformers.
         one_hot_encoder = self.preprocessor.named_transformers_['one_hot']
