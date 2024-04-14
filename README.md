@@ -4,7 +4,7 @@
 
 (Assuming you already pulled the repo and have a shell in it)
 
-(`git clone https://github.com/TXiaoxz/CUSTOMER-INTENT-FORECASTING-IN-E-COMMERCE-PLATFORMS.git` etc.)
+(`git clone https://github.com/TXiaoxz/171Project_WithFrontend.git` etc.)
 
 ### Venv
 
