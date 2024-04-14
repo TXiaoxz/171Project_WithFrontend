@@ -1,0 +1,116 @@
+{% extends 'ind_head.html' %}
+
+{% block content %}
+
+<style>
+/* Override for main content width */
+.content-wrapper {
+  max-width: 90%; /* or any other value you prefer */
+  margin: 0 auto; /* Keeps the content centered */
+}
+
+/* Make iframes big */
+iframe {
+  width: 100em; /* Full width of their parent container */
+  height: 70em; /* Specify a height, or adjust as needed */
+}
+
+#usertable {
+    font-size: 1.5em;
+    line-height: calc(var(--rhythm) * 4 / 3)
+}
+</style>
+
+
+<body>
+    <p><a href="/form">CLICK HERE for complete manual attribute value entry</a></p>
+
+    <form hx-post="/leftover-fields" hx-trigger="change" hx-target="#predict" hx-swap="outerHTML">
+        <table>
+            <thead>
+                <tr>
+                    <th><code>Browser</code></th>
+                    <th><code>OperatingSystems</code></th>
+                    <th><code>VisitorType</code></th>
+                    <th><code>BounceRates</code></th>
+                    <th><code>ExitRates</code></th>
+                    <th><code>PageValues</code></th>
+                    <th><code>SpecialDay</code></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="Browser">
+                            {% for i in range(1, 14) %}
+                            <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="OperatingSystems">
+                            {% for i in range(1, 9) %}
+                            <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="VisitorType">
+                            <option value="Returning_Visitor">Returning Visitor</option>
+                            <option value="New_Visitor">New Visitor</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="BounceRates" step="0.01" min="0" max="1"></td>
+                    <td><input type="number" name="ExitRates" step="0.01" min="0" max="1"></td>
+                    <td><input type="number" name="PageValues" step="0.01" min="0" max="360"></td>
+                    <td><input type="number" name="SpecialDay" step="0.01" min="0" max="1"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!--<input type="submit">-->    
+    </form>
+
+
+
+    <div id="usertable" hx-get="/usertable" hx-trigger="specialClick" hx-swap="outerHTML">
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Attr_Here</code></td>
+                    <td><i>x</i></td>
+                </tr>
+            </tbody>
+        </table>
+
+       <div id="predict" class="box" style="display:flex">
+           <p style="margin:auto"> Prediction: Purchase or no purchase </p>
+       </div class="box">
+
+    </div>
+
+
+    <div class="box grid">
+
+        <a class="box bad" style="display:flex" hx-post="/reset" hx-target="#usertable" hx-swap="outerHTML" data-cols="1 3" data-rows="1">
+            <p style="margin:auto;font-size:1.5em"> Reset counters </p>
+        </a>
+
+        <a class="box info" style="display:flex" hx-post="/refresh" hx-target="#usertable" hx-swap="outerHTML" data-cols="4 6" data-rows="1">
+            <p style="margin:auto;font-size:1.5em"> Refresh Data </p>
+        </a>
+
+    </div>
+
+    <iframe src="/sim-shop"></iframe>
+</body>
+
+
+{% endblock %}
+
